@@ -3,7 +3,7 @@
     "description": "Trait for doctrine entities",
     "keywords": ["DBAL", "ORM", "Database", "Persistence", "Trait", "Entity"],
     "homepage": "https://www.irontec.com",
-    "license": "EUPL",
+    "license": "EUPL-1.1",
     "require": {
         "doctrine/orm": "^2.6"
     },
