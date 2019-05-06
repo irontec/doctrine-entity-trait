@@ -8,8 +8,6 @@ use \Doctrine\ORM\PersistentCollection;
  * @author Irontec <info@irontec.com>
  * @author ddniel16 <daniel@irontec.com>
  * @link https://www.irontec.com
- *
- * @ORM\MappedSuperclass
  */
 trait GetToFieldsTrait
 {
