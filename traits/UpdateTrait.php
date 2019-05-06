@@ -59,7 +59,7 @@ trait UpdateTrait
      * @param string $timeZone
      * @return string
      */
-    public function getCreatedFormat(
+    public function getUpdatedFormat(
         string $format = 'd-m-Y H:i:s e',
         string $timeZone = 'UTC'
     ): string
