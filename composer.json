@@ -1,0 +1,19 @@
+{
+    "name": "irontec/doctrine-entity-trait",
+    "description": "Trait for doctrine entities",
+    "keywords": ["DBAL", "ORM", "Database", "Persistence", "Trait", "Entity"],
+    "homepage": "https://www.irontec.com",
+    "license": "EUPL",
+    "require": {
+        "doctrine/orm": "^2.6"
+    },
+    "autoload": {
+        "psr-4": { "Irontec\\DoctrineEntityTrait\\": "traits/" }
+    },
+    "authors" : [{
+            "name" : "Developers Irontec",
+            "email" : "desarrollo@irontec.com",
+            "homepage" : "https://github.com/irontec"
+        }
+    ]
+}
