@@ -12,7 +12,16 @@ use \Doctrine\ORM\PersistentCollection;
 trait GetToFieldsTrait
 {
 
-    public function __getToFields($fields = NULL)
+    /**
+     * Obtiene un array de respuesta de la entidad, en base a un string separando los campos por coma (,)
+     * Si se quiere obtener campos de entidades relacionadas, se pone el nombre de la entidad y el campo separado por punto (.)
+     *
+     * Example: id,name,email,company.id,company.name
+     *
+     * @param string $fields
+     * @return array
+     */
+    public function __getToFields(?string $fields = NULL): array
     {
 
         if (!is_string($fields)) {
@@ -33,9 +42,23 @@ trait GetToFieldsTrait
         }
 
         foreach ($parseFields as $key => $value) {
-            $getter = 'get' . ucfirst($key);
+
+            if (strpos($key, '_') !== false) {
+                $pieces = explode('_', $key);
+                $pieces = array_map('ucfirst', $pieces);
+                $fieldGetter = implode('', $pieces);
+                $getter = 'get' . ucfirst($fieldGetter);
+            } else {
+                $getter = 'get' . ucfirst($key);
+            }
+
             if (method_exists($this, $getter)) {
                 $data = $this->$getter();
+
+                if (is_null($data) && empty($data)) {
+                    $item[$key] = $data;
+                    continue;
+                }
 
                 if ($data instanceof PersistentCollection) {
                     $item[$key] = $this->_getEntityDateRelation($data, $value, true);
@@ -50,13 +73,13 @@ trait GetToFieldsTrait
                 }
 
             }
-        }
+        }//$parseFields
 
         return $item;
 
     }
 
-    protected function _getEntityData($data, $value)
+    private function _getEntityData($data, $value)
     {
 
         if (!is_object($data)) {
@@ -77,7 +100,7 @@ trait GetToFieldsTrait
 
      }
 
-     protected function _getEntityDateRelation($data, $value, $oneToMany = true)
+     private function _getEntityDateRelation($data, $value, $oneToMany = true)
      {
 
          $newData = array();
