@@ -1,4 +1,7 @@
 <?php
+/**
+ * This file is part of the DoctrineEntityTrait.
+ */
 
 namespace Irontec\DoctrineEntityTrait;
 
@@ -6,8 +9,8 @@ use \Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Irontec <info@irontec.com>
- * @author ddniel16 <daniel@irontec.com>
- * @link https://www.irontec.com
+ * @author ddniel16 <ddniel16>
+ * @link https://github.com/irontec
  *
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks()
