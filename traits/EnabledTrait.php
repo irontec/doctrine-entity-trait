@@ -18,7 +18,7 @@ trait EnabledTrait
 {
 
     /**
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=false, options={"default" : 0})
      */
     private $enabled;
 
@@ -39,6 +39,18 @@ trait EnabledTrait
     {
         $this->enabled = $enabled;
 
+        return $this;
+    }
+
+    public function disable(): self
+    {
+        $this->enabled = false;
+        return $this;
+    }
+
+    public function enable(): self
+    {
+        $this->enabled = true;
         return $this;
     }
 
