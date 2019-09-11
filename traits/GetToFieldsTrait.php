@@ -38,7 +38,9 @@ trait GetToFieldsTrait
         foreach ($fields as $field) {
             $ex = explode('.', $field);
             if (sizeof($ex) > 1) {
-                $parseFields[$ex[0]][] = $ex[1];
+                $key = $ex[0];
+                unset($ex[0]);
+                $parseFields[$key][] = implode('.', $ex);
             } else {
                 $parseFields[$field] = $field;
             }
