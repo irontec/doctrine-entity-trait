@@ -71,6 +71,8 @@ trait GetToFieldsTrait
                     (isset($data->__initializer__) && $data->__initializer__ instanceof \Closure)
                 ||
                     (isset($data->__isInitialized__) && $data->__isInitialized__ === true)
+                ||
+                    (gettype($data) === 'object')
                 ) {
                     $item[$key] = $this->_getEntityDateRelation($data, $value, false);
                 } else {
