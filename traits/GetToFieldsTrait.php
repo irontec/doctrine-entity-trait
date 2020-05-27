@@ -59,9 +59,13 @@ trait GetToFieldsTrait
 
             if (method_exists($this, $getter)) {
                 $data = $this->$getter();
-
                 if (is_null($data) && empty($data)) {
                     $item[$key] = $data;
+                    continue;
+                }
+
+                if($data instanceof \DateTime) {
+                    $item[$key] = $data->getTimestamp();
                     continue;
                 }
 
