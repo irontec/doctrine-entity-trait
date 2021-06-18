@@ -1,31 +1,29 @@
 <?php
+
 /**
  * This file is part of the DoctrineEntityTrait.
+ * @package irontec/doctrine-entity-trait
  */
 
 namespace Irontec\DoctrineEntityTrait;
 
-use \Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
+ *
  * @author Irontec <info@irontec.com>
  * @author ddniel16 <ddniel16>
  * @link https://github.com/irontec
- *
- * @ORM\MappedSuperclass
  */
+#[ORM\MappedSuperclass]
 trait LocationTrait
 {
 
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $latitude;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $latitude;
 
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $longitude;
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $longitude;
 
     public function getLatitude(): ?float
     {
@@ -57,17 +55,13 @@ trait LocationTrait
         }
 
         return trim($this->latitude) . ',' . trim($this->longitude);
-
     }
 
     public function setLocation(float $latitude, float $longitude): self
     {
-
         $this->setLatitude($latitude);
         $this->setLongitude($longitude);
 
         return $this;
-
     }
-
 }

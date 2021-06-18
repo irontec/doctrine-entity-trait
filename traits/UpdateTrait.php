@@ -1,60 +1,52 @@
 <?php
+
 /**
  * This file is part of the DoctrineEntityTrait.
+ * @package irontec/doctrine-entity-trait
  */
 
 namespace Irontec\DoctrineEntityTrait;
 
-use \Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use DateTimeZone;
+use DateTimeInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
+ *
  * @author Irontec <info@irontec.com>
  * @author ddniel16 <ddniel16>
  * @link https://github.com/irontec
- *
- * @ORM\MappedSuperclass
- * @ORM\HasLifecycleCallbacks()
  */
+#[ORM\MappedSuperclass]
+#[ORM\HasLifecycleCallbacks]
 trait UpdateTrait
 {
 
-    /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
-     */
-    private $updated;
+    #[ORM\Column(type: 'datetime')]
+    private ?DateTimeInterface $updated;
 
-    /**
-     * @return \DateTime
-     */
-    public function getUpdated()
+    public function getUpdated(): DateTimeInterface
     {
         return $this->updated;
     }
 
-    /**
-     * @param \DateTime $updated
-     */
-    public function setUpdated($updated): self
+    public function setUpdated(?DateTimeInterface $updated): self
     {
         $this->updated = $updated;
         return $this;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function prePersistUpdated()
+    #[ORM\PrePersist]
+    public function prePersistUpdated(): void
     {
-        $this->setUpdated(new \DateTime('now', new \DateTimeZone('UTC')));
+        $this->setUpdated(new DateTime('now', new DateTimeZone('UTC')));
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
-    public function preUpdateUpdated()
+    #[ORM\PreUpdate]
+    public function preUpdateUpdated(): void
     {
-        $this->setUpdated(new \DateTime('now', new \DateTimeZone('UTC')));
+        $this->setUpdated(new DateTime('now', new DateTimeZone('UTC')));
     }
 
     /**
@@ -65,19 +57,16 @@ trait UpdateTrait
     public function getUpdatedFormat(
         string $format = 'd-m-Y H:i:s e',
         string $timeZone = 'UTC'
-    ): string
-    {
+    ): string {
 
         $timezones = timezone_identifiers_list();
 
         if (in_array($timeZone, $timezones)) {
-            $this->updated->setTimezone(new \DatetimeZone($timeZone));
+            $this->updated->setTimezone(new DatetimeZone($timeZone));
         } else {
-            $this->updated->setTimezone(new \DatetimeZone('UTC'));
+            $this->updated->setTimezone(new DatetimeZone('UTC'));
         }
 
         return $this->updated->format($format);
-
     }
-
 }

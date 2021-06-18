@@ -1,41 +1,36 @@
 <?php
+
 /**
  * This file is part of the DoctrineEntityTrait.
+ * @package irontec/doctrine-entity-trait
  */
 
 namespace Irontec\DoctrineEntityTrait;
 
-use \Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
+ *
  * @author Irontec <info@irontec.com>
  * @author ddniel16 <ddniel16>
  * @link https://github.com/irontec
- *
- * @ORM\MappedSuperclass
- * @ORM\HasLifecycleCallbacks()
  */
+
+#[ORM\MappedSuperclass]
+#[ORM\HasLifecycleCallbacks]
 trait AddressTrait
 {
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $address;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $city;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $state;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private $postalCode;
 
     public function getAddress(): ?string
@@ -80,5 +75,4 @@ trait AddressTrait
         $this->postalCode = $postalCode;
         return $this;
     }
-
 }
