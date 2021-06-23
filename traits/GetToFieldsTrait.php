@@ -1,11 +1,12 @@
 <?php
+
 /**
  * This file is part of the DoctrineEntityTrait.
  */
 
 namespace Irontec\DoctrineEntityTrait;
 
-use \Doctrine\ORM\PersistentCollection;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * @author Irontec <info@irontec.com>
@@ -24,7 +25,7 @@ trait GetToFieldsTrait
      * @param string $fields
      * @return array
      */
-    public function __getToFields(?string $fields = NULL): array
+    public function __getToFields(?string $fields = null): array
     {
 
         if (!is_string($fields)) {
@@ -47,7 +48,6 @@ trait GetToFieldsTrait
         }
 
         foreach ($parseFields as $key => $value) {
-
             if (strpos($key, '_') !== false) {
                 $pieces = explode('_', $key);
                 $pieces = array_map('ucfirst', $pieces);
@@ -64,7 +64,7 @@ trait GetToFieldsTrait
                     continue;
                 }
 
-                if($data instanceof \DateTime) {
+                if ($data instanceof \DateTime) {
                     $item[$key] = $data->getTimestamp();
                     continue;
                 }
@@ -82,12 +82,10 @@ trait GetToFieldsTrait
                 } else {
                     $item[$key] = $this->_getEntityData($data, $value);
                 }
-
             }
         }//$parseFields
 
         return $item;
-
     }
 
     private function _getEntityData($data, $value)
@@ -101,37 +99,34 @@ trait GetToFieldsTrait
             return $data->format('Y-m-d H:i:s');
         }
 
-         $newData = array();
+        $newData = array();
 
-         if (is_array($value)) {
-             $newData[] = $data->__getToFields(implode(',', $value));
-         }
+        if (is_array($value)) {
+            $newData[] = $data->__getToFields(implode(',', $value));
+        }
 
-         return $newData;
+        return $newData;
+    }
 
-     }
+    private function _getEntityDateRelation($data, $value, $oneToMany = true)
+    {
 
-     private function _getEntityDateRelation($data, $value, $oneToMany = true)
-     {
+        $newData = array();
 
-         $newData = array();
-
-         if ($oneToMany === true) {
-             foreach ($data as $entity) {
-                 if (is_array($value)) {
-                     $newData[] = $entity->__getToFields(implode(',', $value));
-                 }
-             }
+        if ($oneToMany === true) {
+            foreach ($data as $entity) {
+                if (is_array($value)) {
+                    $newData[] = $entity->__getToFields(implode(',', $value));
+                }
+            }
 
             return $newData;
-         }
+        }
 
-         if (is_array($value)) {
-             $newData = $data->__getToFields(implode(',', $value));
-         }
+        if (is_array($value)) {
+            $newData = $data->__getToFields(implode(',', $value));
+        }
 
-         return $newData;
-
-     }
-
+        return $newData;
+    }
 }
