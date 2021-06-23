@@ -20,7 +20,7 @@ trait EnabledTrait
 {
 
     #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => 0])]
-    private $enabled;
+    private bool $enabled;
 
     public function getEnabled(): ?bool
     {
