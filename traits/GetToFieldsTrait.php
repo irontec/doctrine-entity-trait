@@ -53,12 +53,14 @@ trait GetToFieldsTrait
                 $pieces = array_map('ucfirst', $pieces);
                 $fieldGetter = implode('', $pieces);
                 $getter = 'get' . ucfirst($fieldGetter);
+                $boolGetter = 'is' . ucfirst($fieldGetter);
             } else {
                 $getter = 'get' . ucfirst($key);
+                $boolGetter = 'is' . ucfirst($key);
             }
 
-            if (method_exists($this, $getter)) {
-                $data = $this->$getter();
+            if (method_exists($this, $getter) || method_exists($this, $boolGetter)) {
+                $data = method_exists($this, $getter) ? $this->$getter() : $this->$boolGetter();
                 if (is_null($data) && empty($data)) {
                     $item[$key] = $data;
                     continue;
