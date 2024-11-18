@@ -2,35 +2,32 @@
 
 /**
  * This file is part of the DoctrineEntityTrait.
- * @package irontec/doctrine-entity-trait
  */
 
 namespace Irontec\DoctrineEntityTrait;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *
  * @author Irontec <info@irontec.com>
- * @author ddniel16 <ddniel16>
- * @link https://github.com/irontec
+ *
+ * @see https://github.com/irontec
  */
-
 #[ORM\MappedSuperclass]
 #[ORM\HasLifecycleCallbacks]
 trait AddressTrait
 {
-
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private $address;
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private $city;
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private $state;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private $postalCode;
 
     public function getAddress(): ?string
@@ -41,6 +38,7 @@ trait AddressTrait
     public function setAddress(?string $address): self
     {
         $this->address = $address;
+
         return $this;
     }
 
@@ -52,6 +50,7 @@ trait AddressTrait
     public function setCity(string $city): self
     {
         $this->city = $city;
+
         return $this;
     }
 
@@ -63,6 +62,7 @@ trait AddressTrait
     public function setState(string $state): self
     {
         $this->state = $state;
+
         return $this;
     }
 
@@ -70,9 +70,11 @@ trait AddressTrait
     {
         return $this->postalCode;
     }
+
     public function setPostalCode(int $postalCode): self
     {
         $this->postalCode = $postalCode;
+
         return $this;
     }
 }

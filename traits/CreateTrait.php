@@ -2,28 +2,26 @@
 
 /**
  * This file is part of the DoctrineEntityTrait.
- * @package irontec/doctrine-entity-trait
  */
 
 namespace Irontec\DoctrineEntityTrait;
 
 use DateTime;
-use DateTimeZone;
 use DateTimeInterface;
+use DateTimeZone;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *
  * @author Irontec <info@irontec.com>
- * @author ddniel16 <ddniel16>
- * @link https://github.com/irontec
+ *
+ * @see https://github.com/irontec
  */
 #[ORM\MappedSuperclass]
 #[ORM\HasLifecycleCallbacks]
 trait CreateTrait
 {
-
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $created;
 
     public function getCreated(): DateTimeInterface
@@ -34,6 +32,7 @@ trait CreateTrait
     public function setCreated(?DateTimeInterface $created): self
     {
         $this->created = $created;
+
         return $this;
     }
 
@@ -43,22 +42,16 @@ trait CreateTrait
         $this->setCreated(new DateTime('now', new DateTimeZone('UTC')));
     }
 
-    /**
-     * @param string $format
-     * @param string $timeZone
-     * @return string
-     */
     public function getCreatedFormat(
         string $format = 'd-m-Y H:i:s e',
-        string $timeZone = 'UTC'
+        string $timeZone = 'UTC',
     ): string {
-
         $timezones = timezone_identifiers_list();
 
         if (in_array($timeZone, $timezones)) {
-            $this->created->setTimezone(new DatetimeZone($timeZone));
+            $this->created->setTimezone(new DateTimeZone($timeZone));
         } else {
-            $this->created->setTimezone(new DatetimeZone('UTC'));
+            $this->created->setTimezone(new DateTimeZone('UTC'));
         }
 
         return $this->created->format($format);

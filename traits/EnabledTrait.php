@@ -2,24 +2,22 @@
 
 /**
  * This file is part of the DoctrineEntityTrait.
- * @package irontec/doctrine-entity-trait
  */
 
 namespace Irontec\DoctrineEntityTrait;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *
  * @author Irontec <info@irontec.com>
- * @author ddniel16 <ddniel16>
- * @link https://github.com/irontec
+ *
+ * @see https://github.com/irontec
  */
 #[ORM\MappedSuperclass]
 trait EnabledTrait
 {
-
-    #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => 0])]
+    #[ORM\Column(type: Types::BOOLEAN, nullable: false, options: ['default' => 0])]
     private bool $enabled;
 
     public function getEnabled(): ?bool
@@ -39,18 +37,21 @@ trait EnabledTrait
         if (is_null($this->enabled)) {
             return false;
         }
+
         return $this->enabled;
     }
 
     public function disable(): self
     {
         $this->enabled = false;
+
         return $this;
     }
 
     public function enable(): self
     {
         $this->enabled = true;
+
         return $this;
     }
 }
