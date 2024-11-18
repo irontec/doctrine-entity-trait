@@ -1,20 +1,31 @@
 {
     "name": "irontec/doctrine-entity-trait",
     "description": "Trait for doctrine entities",
-    "keywords": ["DBAL", "ORM", "Database", "Persistence", "Trait", "Entity"],
+    "keywords": [
+      "DBAL",
+      "ORM",
+      "Database",
+      "Persistence",
+      "Trait",
+      "Entity"
+    ],
     "homepage": "https://www.irontec.com",
     "license": "EUPL-1.1",
     "require": {
-        "php": ">=8.0",
-        "doctrine/orm": "^2.9"
+      "php": ">=8.1",
+      "doctrine/orm": ">=3.3"
     },
     "autoload": {
-        "psr-4": { "Irontec\\DoctrineEntityTrait\\": "traits/" }
+      "psr-4": {
+        "Irontec\\DoctrineEntityTrait\\": "traits/"
+      }
     },
-    "authors" : [{
-            "name" : "Developers Irontec",
-            "email" : "internet@irontec.com",
-            "homepage" : "https://github.com/irontec"
-        }
+    "authors": [
+      {
+        "name": "Developers Irontec",
+        "email": "internet@irontec.com",
+        "homepage": "https://github.com/irontec"
+      }
     ]
-}
+  }
+  
