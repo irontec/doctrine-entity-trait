@@ -17,3 +17,4 @@ Trait for doctrine entities
 * [UpdateTrait](docs/UpdateTrait.md)
 * [UserNameTrait](docs/UserNameTrait.md)
 * [GetToFieldsTrait](docs/GetToFieldsTrait.md)
+* [TimestampableTrait](docs/TimestampableTrait.md)
